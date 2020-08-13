@@ -1,0 +1,24 @@
+{
+    "name": "andy-c/swoole-kafka-client",
+    "description": "A php kafka client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "andy-c",
+            "email": "cylbdda@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "monolog/monolog": "^1.25",
+        "ext-swoole": ">=4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "KafkaService\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
