@@ -154,7 +154,7 @@ class Consumer implements ConsumerInterface
         $keyTabFile = $this->kafkaConsumerConfig->keyTabFile;
         $accounts = $this->kafkaConsumerConfig->kerberosPrincipal;
         if ($accounts && $keyTabFile) {
-            $conf->set('sasl.kerberos.min.time.before.relogin', '3600000');
+            $conf->set('sasl.kerberos.min.time.before.relogin', $this->kafkaConsumerConfig->kerberosReloginTime);
             $conf->set('security.protocol', $this->kafkaConsumerConfig->securityProtocol);
             $conf->set('sasl.kerberos.principal', $accounts);
             $conf->set('sasl.kerberos.keytab', $keyTabFile);

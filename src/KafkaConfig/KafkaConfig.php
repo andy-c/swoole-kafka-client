@@ -87,4 +87,10 @@ class KafkaConfig
     * @var string
    */
    public $offsetReset = 'largest';
+
+   /**
+    * sasl.kerberos.min.time.before.relogin
+    * @var string
+   */
+   public $kerberosReloginTime = 3600000;
 }
