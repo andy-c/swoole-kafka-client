@@ -92,5 +92,5 @@ class KafkaConfig
     * sasl.kerberos.min.time.before.relogin
     * @var string
    */
-   public $kerberosReloginTime = 3600000;
+   public $kerberosReloginTime = '3600000';
 }
