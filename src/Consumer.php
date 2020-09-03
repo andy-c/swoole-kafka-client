@@ -54,6 +54,17 @@ class Consumer implements ConsumerInterface
     */
     const STOPPED = 2;
 
+    /**
+     * master name
+     * @var string
+    */
+    const MASTER_NAME="php-kafka-client-master";
+
+    /**
+     * worker name
+     * @var string
+    */
+    const WORKER_NAME="php-kafka-client-worker";
 
     public function __construct(KafkaConfig $kafkaConsumerConfig)
     {
@@ -83,7 +94,7 @@ class Consumer implements ConsumerInterface
                     return Coroutine::stats()['coroutine_num'] === 0;
                 }
             ]);
-            swoole_set_process_name("php-kafka-client-master");
+            swoole_set_process_name(self::MASTER_NAME);
             $pool->on('WorkerStart',function($pool,$workerid){
                 $this->workerStart($pool,$workerid);
             });
@@ -110,7 +121,7 @@ class Consumer implements ConsumerInterface
     {
         $this->status = self::RUNNING;
         //set worker name
-        swoole_set_process_name('php-kafka-client-worker');
+        swoole_set_process_name(self::WORKER_NAME);
         //handle signal and shudwon
         $this->handleShutdownAndSignal($workerId);
         $conf = new Conf();
@@ -178,7 +189,7 @@ class Consumer implements ConsumerInterface
                 switch ($message->err){
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
                         //TODO
-                        Helper::getLogger()->info("message is ".$message->payload.' offset is '.$message->offset);
+                        Helper::getLogger()->error("message is ".$message->payload.' offset is '.$message->offset);
                         if($commit){
                             $consumer->commitAsync();
                         }
