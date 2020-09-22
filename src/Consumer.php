@@ -66,6 +66,12 @@ class Consumer implements ConsumerInterface
     */
     const WORKER_NAME="php-kafka-client-worker";
 
+    /**
+     * master pid file
+     * @var string
+    */
+    const MASTER_PID_FILE='/opt/kafka_master.pid';
+
     public function __construct(KafkaConfig $kafkaConsumerConfig)
     {
         $this->kafkaConsumerConfig = $kafkaConsumerConfig;
@@ -95,6 +101,8 @@ class Consumer implements ConsumerInterface
                 }
             ]);
             swoole_set_process_name(self::MASTER_NAME);
+            //save master pid to file
+            file_put_contents(self::MASTER_PID_FILE,getmypid());
             $pool->on('WorkerStart',function($pool,$workerid){
                 $this->workerStart($pool,$workerid);
             });
