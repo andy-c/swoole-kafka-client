@@ -196,7 +196,7 @@ class Consumer implements ConsumerInterface
                 switch ($message->err){
                     case RD_KAFKA_RESP_ERR_NO_ERROR:
                         //TODO
-                        Helper::getLogger()->error("message is ".$message->payload.' offset is '.$message->offset);
+                        Helper::getLogger()->info("message is ".$message->payload.' offset is '.$message->offset);
                         if($commit){
                             $consumer->commitAsync();
                         }
