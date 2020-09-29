@@ -18,6 +18,8 @@ swoole-kafka-client 是一款基于swoole process是实现的kafka 客户端，�
 
 
 ## 停止运行
+
+停止运行会等待最后一次消费结束之后停止进程
 ```
  kill -15 $masterpid
 ```
