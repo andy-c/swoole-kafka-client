@@ -13,7 +13,6 @@ use Swoole\Process;
 use Swoole\Process\Pool;
 use RdKafka\KafkaConsumer;
 use KafkaService\Helper\Helper;
-use \Exception;
 
 class Consumer implements ConsumerInterface
 {
@@ -151,7 +150,7 @@ class Consumer implements ConsumerInterface
                     $kafka->assign(NULL);
                     break;
                 default:
-                    $er = new Exception($err);
+                    $er = new KafkaException($err);
                     Helper::getLogger()->err("fetch-error ".$er->getMessage());
             }
         });
